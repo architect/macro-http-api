@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@architect/utils": "^1.5.0"
+  }
+}
