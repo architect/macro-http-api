@@ -1,5 +1,5 @@
 @app
-test-http
+test-http-2
 
 @static
 folder public
@@ -12,5 +12,5 @@ patch /cats/:catID
 put /cats/:catID
 delete /cats/:catID
 
-@macros
-http
+#@macros
+#http
