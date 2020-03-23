@@ -1,12 +1,12 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: Exported by architect/package@1.2.7 on 2020-03-23T19:36:22.999Z
+Description: Exported by architect/package@1.2.7 on 2020-03-23T20:52:59.826Z
 Resources:
   GetIndex:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      CodeUri: s3://test-http-3-cfn-deployments-7814d/866aa7bd6288791164e11aee6153060b
+      CodeUri: s3://test-http-3-cfn-deployments-7814d/dda4b3ba7742668315f3eccf1cfe6170
       Runtime: nodejs12.x
       MemorySize: 1152
       Timeout: 5
@@ -34,12 +34,12 @@ Resources:
             Path: /
             Method: GET
         ImplicitApi:
-          Ref: HTTP
+          Type: HttpApi
   GetCats:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      CodeUri: s3://test-http-3-cfn-deployments-7814d/49b295ce884db21c4670b146307af872
+      CodeUri: s3://test-http-3-cfn-deployments-7814d/2016208e00b864971ce9fc2037c3a8c1
       Runtime: nodejs12.x
       MemorySize: 1152
       Timeout: 5
@@ -270,6 +270,38 @@ Resources:
             - {}
       Roles:
       - Ref: Role
+  GetStaticProxy:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.handler
+      CodeUri: s3://test-http-3-cfn-deployments-7814d/b8860f083d3babe7264bd6535d6e0307
+      Runtime: nodejs12.x
+      MemorySize: 1152
+      Timeout: 5
+      Environment:
+        Variables:
+          ARC_ROLE:
+            Ref: Role
+          ARC_CLOUDFORMATION:
+            Ref: AWS::StackName
+          ARC_APP_NAME: test-http-3
+          ARC_HTTP: aws_proxy
+          NODE_ENV: staging
+          SESSION_TABLE_NAME: jwe
+          ARC_STATIC_BUCKET:
+            Ref: StaticBucket
+          ARC_STATIC_SPA: 'false'
+      Role:
+        Fn::Sub:
+        - arn:aws:iam::${AWS::AccountId}:role/${roleName}
+        - roleName:
+            Ref: Role
+      Events:
+        GetStaticProxyEvent:
+          Type: HttpApi
+          Properties:
+            Path: /_static/{proxy+}
+            Method: GET
 Outputs:
   BucketURL:
     Description: Bucket URL
@@ -278,3 +310,10 @@ Outputs:
       - http://${bukkit}.s3-website-${AWS::Region}.amazonaws.com
       - bukkit:
           Ref: StaticBucket
+  HTTP:
+    Description: API Gateway
+    Value:
+      Fn::Sub:
+      - https://${idx}.execute-api.${AWS::Region}.amazonaws.com
+      - idx:
+          Ref: ServerlessHttpApi
