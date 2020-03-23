@@ -35,6 +35,8 @@ module.exports = function http(arc, cfn, stage) {
         delete cfn.Resources[resource].Properties.Events[eventname].Properties.RestApiId
         //cfn.Resources[resource].Properties.Events[eventname].Properties.PayloadFormatVersion = '1.0'
         //cfn.Resources[resource].Properties.Events[eventname].Properties.ApiId = { Ref: 'HTTP' }
+        if (resource.toLowerCase() === 'getindex')
+          cfn.Resources[resource].Properties.Events.ImplicitApi = { Ref: 'HTTP' }
       }
     }
   }

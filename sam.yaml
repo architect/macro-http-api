@@ -1,12 +1,12 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: Exported by architect/package@1.2.7 on 2020-03-23T19:29:20.294Z
+Description: Exported by architect/package@1.2.7 on 2020-03-23T19:36:22.999Z
 Resources:
   GetIndex:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      CodeUri: s3://test-http-3-cfn-deployments-7814d/814bb48f01f5e927e0caaf55ef803f49
+      CodeUri: s3://test-http-3-cfn-deployments-7814d/866aa7bd6288791164e11aee6153060b
       Runtime: nodejs12.x
       MemorySize: 1152
       Timeout: 5
@@ -33,6 +33,8 @@ Resources:
           Properties:
             Path: /
             Method: GET
+        ImplicitApi:
+          Ref: HTTP
   GetCats:
     Type: AWS::Serverless::Function
     Properties:
