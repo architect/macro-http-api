@@ -1,165 +1,12 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: Exported by architect/package@1.2.7 on 2020-03-22T00:37:13.618Z
+Description: Exported by architect/package@1.2.7 on 2020-03-23T19:29:20.294Z
 Resources:
-  TestHttp2:
-    Type: AWS::Serverless::Api
-    Properties:
-      StageName: staging
-      DefinitionBody:
-        openapi: 3.0.1
-        info:
-          title:
-            Ref: AWS::StackName
-        paths:
-          /:
-            get:
-              responses:
-                '200':
-                  description: 200 response
-              x-amazon-apigateway-integration:
-                uri:
-                  Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${GetIndex.Arn}/invocations
-                responses:
-                  default:
-                    statusCode: '200'
-                    contentHandling: CONVERT_TO_TEXT
-                passthroughBehavior: when_no_match
-                httpMethod: POST
-                contentHandling: CONVERT_TO_TEXT
-                type: aws_proxy
-          /cats:
-            get:
-              responses:
-                '200':
-                  description: 200 response
-              x-amazon-apigateway-integration:
-                uri:
-                  Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${GetCats.Arn}/invocations
-                responses:
-                  default:
-                    statusCode: '200'
-                    contentHandling: CONVERT_TO_TEXT
-                passthroughBehavior: when_no_match
-                httpMethod: POST
-                contentHandling: CONVERT_TO_TEXT
-                type: aws_proxy
-            post:
-              responses:
-                '200':
-                  description: 200 response
-              x-amazon-apigateway-integration:
-                uri:
-                  Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${PostCats.Arn}/invocations
-                responses:
-                  default:
-                    statusCode: '200'
-                    contentHandling: CONVERT_TO_TEXT
-                passthroughBehavior: when_no_match
-                httpMethod: POST
-                contentHandling: CONVERT_TO_TEXT
-                type: aws_proxy
-          /cats/{catID}:
-            patch:
-              responses:
-                '200':
-                  description: 200 response
-              x-amazon-apigateway-integration:
-                uri:
-                  Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${PatchCatsCatID.Arn}/invocations
-                responses:
-                  default:
-                    statusCode: '200'
-                    contentHandling: CONVERT_TO_TEXT
-                passthroughBehavior: when_no_match
-                httpMethod: POST
-                contentHandling: CONVERT_TO_TEXT
-                type: aws_proxy
-            put:
-              responses:
-                '200':
-                  description: 200 response
-              x-amazon-apigateway-integration:
-                uri:
-                  Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${PutCatsCatID.Arn}/invocations
-                responses:
-                  default:
-                    statusCode: '200'
-                    contentHandling: CONVERT_TO_TEXT
-                passthroughBehavior: when_no_match
-                httpMethod: POST
-                contentHandling: CONVERT_TO_TEXT
-                type: aws_proxy
-            delete:
-              responses:
-                '200':
-                  description: 200 response
-              x-amazon-apigateway-integration:
-                uri:
-                  Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${DeleteCatsCatID.Arn}/invocations
-                responses:
-                  default:
-                    statusCode: '200'
-                    contentHandling: CONVERT_TO_TEXT
-                passthroughBehavior: when_no_match
-                httpMethod: POST
-                contentHandling: CONVERT_TO_TEXT
-                type: aws_proxy
-          /{proxy+}:
-            x-amazon-apigateway-any-method:
-              parameters:
-              - name: proxy
-                in: path
-                required: true
-                schema:
-                  type: string
-              x-amazon-apigateway-integration:
-                uri:
-                  Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${GetIndex.Arn}/invocations
-                responses:
-                  default:
-                    statusCode: '200'
-                passthroughBehavior: when_no_match
-                httpMethod: POST
-                cacheNamespace: xlr8r
-                cacheKeyParameters:
-                - method.request.path.proxy
-                contentHandling: CONVERT_TO_TEXT
-                type: aws_proxy
-          /_static/{proxy+}:
-            x-amazon-apigateway-any-method:
-              parameters:
-              - name: proxy
-                in: path
-                required: true
-                schema:
-                  type: string
-              x-amazon-apigateway-integration:
-                uri:
-                  Fn::Sub:
-                  - http://${bukkit}.s3.${AWS::Region}.amazonaws.com/{proxy}
-                  - bukkit:
-                      Ref: StaticBucket
-                responses:
-                  default:
-                    statusCode: '200'
-                requestParameters:
-                  integration.request.path.proxy: method.request.path.proxy
-                passthroughBehavior: when_no_match
-                httpMethod: ANY
-                cacheNamespace: xlr8r2
-                cacheKeyParameters:
-                - method.request.path.proxy
-                type: http_proxy
-      EndpointConfiguration: REGIONAL
-      BinaryMediaTypes:
-      - '*~1*'
-      MinimumCompressionSize: 0
   GetIndex:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      CodeUri: s3://test-http-2-cfn-deployments-a9abc/060505fe79eb32ef8d10e438ba5d7cf5
+      CodeUri: s3://test-http-3-cfn-deployments-7814d/814bb48f01f5e927e0caaf55ef803f49
       Runtime: nodejs12.x
       MemorySize: 1152
       Timeout: 5
@@ -169,7 +16,7 @@ Resources:
             Ref: Role
           ARC_CLOUDFORMATION:
             Ref: AWS::StackName
-          ARC_APP_NAME: test-http-2
+          ARC_APP_NAME: test-http-3
           ARC_HTTP: aws_proxy
           NODE_ENV: staging
           SESSION_TABLE_NAME: jwe
@@ -182,17 +29,15 @@ Resources:
             Ref: Role
       Events:
         GetIndexEvent:
-          Type: Api
+          Type: HttpApi
           Properties:
             Path: /
             Method: GET
-            RestApiId:
-              Ref: TestHttp2
   GetCats:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      CodeUri: s3://test-http-2-cfn-deployments-a9abc/49b295ce884db21c4670b146307af872
+      CodeUri: s3://test-http-3-cfn-deployments-7814d/49b295ce884db21c4670b146307af872
       Runtime: nodejs12.x
       MemorySize: 1152
       Timeout: 5
@@ -202,7 +47,7 @@ Resources:
             Ref: Role
           ARC_CLOUDFORMATION:
             Ref: AWS::StackName
-          ARC_APP_NAME: test-http-2
+          ARC_APP_NAME: test-http-3
           ARC_HTTP: aws_proxy
           NODE_ENV: staging
           SESSION_TABLE_NAME: jwe
@@ -215,17 +60,15 @@ Resources:
             Ref: Role
       Events:
         GetCatsEvent:
-          Type: Api
+          Type: HttpApi
           Properties:
             Path: /cats
             Method: GET
-            RestApiId:
-              Ref: TestHttp2
   PostCats:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      CodeUri: s3://test-http-2-cfn-deployments-a9abc/960fb17dc5cfbe355f6c78e4128e9857
+      CodeUri: s3://test-http-3-cfn-deployments-7814d/960fb17dc5cfbe355f6c78e4128e9857
       Runtime: nodejs12.x
       MemorySize: 1152
       Timeout: 5
@@ -235,7 +78,7 @@ Resources:
             Ref: Role
           ARC_CLOUDFORMATION:
             Ref: AWS::StackName
-          ARC_APP_NAME: test-http-2
+          ARC_APP_NAME: test-http-3
           ARC_HTTP: aws_proxy
           NODE_ENV: staging
           SESSION_TABLE_NAME: jwe
@@ -248,17 +91,15 @@ Resources:
             Ref: Role
       Events:
         PostCatsEvent:
-          Type: Api
+          Type: HttpApi
           Properties:
             Path: /cats
             Method: POST
-            RestApiId:
-              Ref: TestHttp2
   PatchCatsCatID:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      CodeUri: s3://test-http-2-cfn-deployments-a9abc/e8a21281d77888c58c83f910036968ec
+      CodeUri: s3://test-http-3-cfn-deployments-7814d/e8a21281d77888c58c83f910036968ec
       Runtime: nodejs12.x
       MemorySize: 1152
       Timeout: 5
@@ -268,7 +109,7 @@ Resources:
             Ref: Role
           ARC_CLOUDFORMATION:
             Ref: AWS::StackName
-          ARC_APP_NAME: test-http-2
+          ARC_APP_NAME: test-http-3
           ARC_HTTP: aws_proxy
           NODE_ENV: staging
           SESSION_TABLE_NAME: jwe
@@ -281,17 +122,15 @@ Resources:
             Ref: Role
       Events:
         PatchCatsCatIDEvent:
-          Type: Api
+          Type: HttpApi
           Properties:
             Path: /cats/{catID}
             Method: PATCH
-            RestApiId:
-              Ref: TestHttp2
   PutCatsCatID:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      CodeUri: s3://test-http-2-cfn-deployments-a9abc/772acb4242980bdb88adca9bc4fe2e8f
+      CodeUri: s3://test-http-3-cfn-deployments-7814d/772acb4242980bdb88adca9bc4fe2e8f
       Runtime: nodejs12.x
       MemorySize: 1152
       Timeout: 5
@@ -301,7 +140,7 @@ Resources:
             Ref: Role
           ARC_CLOUDFORMATION:
             Ref: AWS::StackName
-          ARC_APP_NAME: test-http-2
+          ARC_APP_NAME: test-http-3
           ARC_HTTP: aws_proxy
           NODE_ENV: staging
           SESSION_TABLE_NAME: jwe
@@ -314,17 +153,15 @@ Resources:
             Ref: Role
       Events:
         PutCatsCatIDEvent:
-          Type: Api
+          Type: HttpApi
           Properties:
             Path: /cats/{catID}
             Method: PUT
-            RestApiId:
-              Ref: TestHttp2
   DeleteCatsCatID:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      CodeUri: s3://test-http-2-cfn-deployments-a9abc/64814a5e8f3aa5f8934478477f70033a
+      CodeUri: s3://test-http-3-cfn-deployments-7814d/64814a5e8f3aa5f8934478477f70033a
       Runtime: nodejs12.x
       MemorySize: 1152
       Timeout: 5
@@ -334,7 +171,7 @@ Resources:
             Ref: Role
           ARC_CLOUDFORMATION:
             Ref: AWS::StackName
-          ARC_APP_NAME: test-http-2
+          ARC_APP_NAME: test-http-3
           ARC_HTTP: aws_proxy
           NODE_ENV: staging
           SESSION_TABLE_NAME: jwe
@@ -347,24 +184,10 @@ Resources:
             Ref: Role
       Events:
         DeleteCatsCatIDEvent:
-          Type: Api
+          Type: HttpApi
           Properties:
             Path: /cats/{catID}
             Method: DELETE
-            RestApiId:
-              Ref: TestHttp2
-  InvokeProxyPermission:
-    Type: AWS::Lambda::Permission
-    Properties:
-      FunctionName:
-        Ref: GetIndex
-      Action: lambda:InvokeFunction
-      Principal: apigateway.amazonaws.com
-      SourceArn:
-        Fn::Sub:
-        - arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${restApiId}/*/*
-        - restApiId:
-            Ref: TestHttp2
   StaticBucket:
     Type: AWS::S3::Bucket
     Properties:
@@ -446,17 +269,6 @@ Resources:
       Roles:
       - Ref: Role
 Outputs:
-  API:
-    Description: API Gateway
-    Value:
-      Fn::Sub:
-      - https://${restApiId}.execute-api.${AWS::Region}.amazonaws.com/staging
-      - restApiId:
-          Ref: TestHttp2
-  restApiId:
-    Description: HTTP restApiId
-    Value:
-      Ref: TestHttp2
   BucketURL:
     Description: Bucket URL
     Value:

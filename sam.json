@@ -1,240 +1,8 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
   "Transform": "AWS::Serverless-2016-10-31",
-  "Description": "Exported by architect/package@1.2.7 on 2020-03-22T00:37:13.618Z",
+  "Description": "Exported by architect/package@1.2.7 on 2020-03-23T19:29:20.294Z",
   "Resources": {
-    "TestHttp2": {
-      "Type": "AWS::Serverless::Api",
-      "Properties": {
-        "StageName": "staging",
-        "DefinitionBody": {
-          "openapi": "3.0.1",
-          "info": {
-            "title": {
-              "Ref": "AWS::StackName"
-            }
-          },
-          "paths": {
-            "/": {
-              "get": {
-                "responses": {
-                  "200": {
-                    "description": "200 response"
-                  }
-                },
-                "x-amazon-apigateway-integration": {
-                  "uri": {
-                    "Fn::Sub": "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${GetIndex.Arn}/invocations"
-                  },
-                  "responses": {
-                    "default": {
-                      "statusCode": "200",
-                      "contentHandling": "CONVERT_TO_TEXT"
-                    }
-                  },
-                  "passthroughBehavior": "when_no_match",
-                  "httpMethod": "POST",
-                  "contentHandling": "CONVERT_TO_TEXT",
-                  "type": "aws_proxy"
-                }
-              }
-            },
-            "/cats": {
-              "get": {
-                "responses": {
-                  "200": {
-                    "description": "200 response"
-                  }
-                },
-                "x-amazon-apigateway-integration": {
-                  "uri": {
-                    "Fn::Sub": "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${GetCats.Arn}/invocations"
-                  },
-                  "responses": {
-                    "default": {
-                      "statusCode": "200",
-                      "contentHandling": "CONVERT_TO_TEXT"
-                    }
-                  },
-                  "passthroughBehavior": "when_no_match",
-                  "httpMethod": "POST",
-                  "contentHandling": "CONVERT_TO_TEXT",
-                  "type": "aws_proxy"
-                }
-              },
-              "post": {
-                "responses": {
-                  "200": {
-                    "description": "200 response"
-                  }
-                },
-                "x-amazon-apigateway-integration": {
-                  "uri": {
-                    "Fn::Sub": "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${PostCats.Arn}/invocations"
-                  },
-                  "responses": {
-                    "default": {
-                      "statusCode": "200",
-                      "contentHandling": "CONVERT_TO_TEXT"
-                    }
-                  },
-                  "passthroughBehavior": "when_no_match",
-                  "httpMethod": "POST",
-                  "contentHandling": "CONVERT_TO_TEXT",
-                  "type": "aws_proxy"
-                }
-              }
-            },
-            "/cats/{catID}": {
-              "patch": {
-                "responses": {
-                  "200": {
-                    "description": "200 response"
-                  }
-                },
-                "x-amazon-apigateway-integration": {
-                  "uri": {
-                    "Fn::Sub": "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${PatchCatsCatID.Arn}/invocations"
-                  },
-                  "responses": {
-                    "default": {
-                      "statusCode": "200",
-                      "contentHandling": "CONVERT_TO_TEXT"
-                    }
-                  },
-                  "passthroughBehavior": "when_no_match",
-                  "httpMethod": "POST",
-                  "contentHandling": "CONVERT_TO_TEXT",
-                  "type": "aws_proxy"
-                }
-              },
-              "put": {
-                "responses": {
-                  "200": {
-                    "description": "200 response"
-                  }
-                },
-                "x-amazon-apigateway-integration": {
-                  "uri": {
-                    "Fn::Sub": "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${PutCatsCatID.Arn}/invocations"
-                  },
-                  "responses": {
-                    "default": {
-                      "statusCode": "200",
-                      "contentHandling": "CONVERT_TO_TEXT"
-                    }
-                  },
-                  "passthroughBehavior": "when_no_match",
-                  "httpMethod": "POST",
-                  "contentHandling": "CONVERT_TO_TEXT",
-                  "type": "aws_proxy"
-                }
-              },
-              "delete": {
-                "responses": {
-                  "200": {
-                    "description": "200 response"
-                  }
-                },
-                "x-amazon-apigateway-integration": {
-                  "uri": {
-                    "Fn::Sub": "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${DeleteCatsCatID.Arn}/invocations"
-                  },
-                  "responses": {
-                    "default": {
-                      "statusCode": "200",
-                      "contentHandling": "CONVERT_TO_TEXT"
-                    }
-                  },
-                  "passthroughBehavior": "when_no_match",
-                  "httpMethod": "POST",
-                  "contentHandling": "CONVERT_TO_TEXT",
-                  "type": "aws_proxy"
-                }
-              }
-            },
-            "/{proxy+}": {
-              "x-amazon-apigateway-any-method": {
-                "parameters": [
-                  {
-                    "name": "proxy",
-                    "in": "path",
-                    "required": true,
-                    "schema": {
-                      "type": "string"
-                    }
-                  }
-                ],
-                "x-amazon-apigateway-integration": {
-                  "uri": {
-                    "Fn::Sub": "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${GetIndex.Arn}/invocations"
-                  },
-                  "responses": {
-                    "default": {
-                      "statusCode": "200"
-                    }
-                  },
-                  "passthroughBehavior": "when_no_match",
-                  "httpMethod": "POST",
-                  "cacheNamespace": "xlr8r",
-                  "cacheKeyParameters": [
-                    "method.request.path.proxy"
-                  ],
-                  "contentHandling": "CONVERT_TO_TEXT",
-                  "type": "aws_proxy"
-                }
-              }
-            },
-            "/_static/{proxy+}": {
-              "x-amazon-apigateway-any-method": {
-                "parameters": [
-                  {
-                    "name": "proxy",
-                    "in": "path",
-                    "required": true,
-                    "schema": {
-                      "type": "string"
-                    }
-                  }
-                ],
-                "x-amazon-apigateway-integration": {
-                  "uri": {
-                    "Fn::Sub": [
-                      "http://${bukkit}.s3.${AWS::Region}.amazonaws.com/{proxy}",
-                      {
-                        "bukkit": {
-                          "Ref": "StaticBucket"
-                        }
-                      }
-                    ]
-                  },
-                  "responses": {
-                    "default": {
-                      "statusCode": "200"
-                    }
-                  },
-                  "requestParameters": {
-                    "integration.request.path.proxy": "method.request.path.proxy"
-                  },
-                  "passthroughBehavior": "when_no_match",
-                  "httpMethod": "ANY",
-                  "cacheNamespace": "xlr8r2",
-                  "cacheKeyParameters": [
-                    "method.request.path.proxy"
-                  ],
-                  "type": "http_proxy"
-                }
-              }
-            }
-          }
-        },
-        "EndpointConfiguration": "REGIONAL",
-        "BinaryMediaTypes": [
-          "*~1*"
-        ],
-        "MinimumCompressionSize": 0
-      }
-    },
     "GetIndex": {
       "Type": "AWS::Serverless::Function",
       "Properties": {
@@ -251,7 +19,7 @@
             "ARC_CLOUDFORMATION": {
               "Ref": "AWS::StackName"
             },
-            "ARC_APP_NAME": "test-http-2",
+            "ARC_APP_NAME": "test-http-3",
             "ARC_HTTP": "aws_proxy",
             "NODE_ENV": "staging",
             "SESSION_TABLE_NAME": "jwe",
@@ -272,13 +40,10 @@
         },
         "Events": {
           "GetIndexEvent": {
-            "Type": "Api",
+            "Type": "HttpApi",
             "Properties": {
               "Path": "/",
-              "Method": "GET",
-              "RestApiId": {
-                "Ref": "TestHttp2"
-              }
+              "Method": "GET"
             }
           }
         }
@@ -300,7 +65,7 @@
             "ARC_CLOUDFORMATION": {
               "Ref": "AWS::StackName"
             },
-            "ARC_APP_NAME": "test-http-2",
+            "ARC_APP_NAME": "test-http-3",
             "ARC_HTTP": "aws_proxy",
             "NODE_ENV": "staging",
             "SESSION_TABLE_NAME": "jwe",
@@ -321,13 +86,10 @@
         },
         "Events": {
           "GetCatsEvent": {
-            "Type": "Api",
+            "Type": "HttpApi",
             "Properties": {
               "Path": "/cats",
-              "Method": "GET",
-              "RestApiId": {
-                "Ref": "TestHttp2"
-              }
+              "Method": "GET"
             }
           }
         }
@@ -349,7 +111,7 @@
             "ARC_CLOUDFORMATION": {
               "Ref": "AWS::StackName"
             },
-            "ARC_APP_NAME": "test-http-2",
+            "ARC_APP_NAME": "test-http-3",
             "ARC_HTTP": "aws_proxy",
             "NODE_ENV": "staging",
             "SESSION_TABLE_NAME": "jwe",
@@ -370,13 +132,10 @@
         },
         "Events": {
           "PostCatsEvent": {
-            "Type": "Api",
+            "Type": "HttpApi",
             "Properties": {
               "Path": "/cats",
-              "Method": "POST",
-              "RestApiId": {
-                "Ref": "TestHttp2"
-              }
+              "Method": "POST"
             }
           }
         }
@@ -398,7 +157,7 @@
             "ARC_CLOUDFORMATION": {
               "Ref": "AWS::StackName"
             },
-            "ARC_APP_NAME": "test-http-2",
+            "ARC_APP_NAME": "test-http-3",
             "ARC_HTTP": "aws_proxy",
             "NODE_ENV": "staging",
             "SESSION_TABLE_NAME": "jwe",
@@ -419,13 +178,10 @@
         },
         "Events": {
           "PatchCatsCatIDEvent": {
-            "Type": "Api",
+            "Type": "HttpApi",
             "Properties": {
               "Path": "/cats/{catID}",
-              "Method": "PATCH",
-              "RestApiId": {
-                "Ref": "TestHttp2"
-              }
+              "Method": "PATCH"
             }
           }
         }
@@ -447,7 +203,7 @@
             "ARC_CLOUDFORMATION": {
               "Ref": "AWS::StackName"
             },
-            "ARC_APP_NAME": "test-http-2",
+            "ARC_APP_NAME": "test-http-3",
             "ARC_HTTP": "aws_proxy",
             "NODE_ENV": "staging",
             "SESSION_TABLE_NAME": "jwe",
@@ -468,13 +224,10 @@
         },
         "Events": {
           "PutCatsCatIDEvent": {
-            "Type": "Api",
+            "Type": "HttpApi",
             "Properties": {
               "Path": "/cats/{catID}",
-              "Method": "PUT",
-              "RestApiId": {
-                "Ref": "TestHttp2"
-              }
+              "Method": "PUT"
             }
           }
         }
@@ -496,7 +249,7 @@
             "ARC_CLOUDFORMATION": {
               "Ref": "AWS::StackName"
             },
-            "ARC_APP_NAME": "test-http-2",
+            "ARC_APP_NAME": "test-http-3",
             "ARC_HTTP": "aws_proxy",
             "NODE_ENV": "staging",
             "SESSION_TABLE_NAME": "jwe",
@@ -517,35 +270,12 @@
         },
         "Events": {
           "DeleteCatsCatIDEvent": {
-            "Type": "Api",
+            "Type": "HttpApi",
             "Properties": {
               "Path": "/cats/{catID}",
-              "Method": "DELETE",
-              "RestApiId": {
-                "Ref": "TestHttp2"
-              }
+              "Method": "DELETE"
             }
           }
-        }
-      }
-    },
-    "InvokeProxyPermission": {
-      "Type": "AWS::Lambda::Permission",
-      "Properties": {
-        "FunctionName": {
-          "Ref": "GetIndex"
-        },
-        "Action": "lambda:InvokeFunction",
-        "Principal": "apigateway.amazonaws.com",
-        "SourceArn": {
-          "Fn::Sub": [
-            "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${restApiId}/*/*",
-            {
-              "restApiId": {
-                "Ref": "TestHttp2"
-              }
-            }
-          ]
         }
       }
     },
@@ -693,25 +423,6 @@
     }
   },
   "Outputs": {
-    "API": {
-      "Description": "API Gateway",
-      "Value": {
-        "Fn::Sub": [
-          "https://${restApiId}.execute-api.${AWS::Region}.amazonaws.com/staging",
-          {
-            "restApiId": {
-              "Ref": "TestHttp2"
-            }
-          }
-        ]
-      }
-    },
-    "restApiId": {
-      "Description": "HTTP restApiId",
-      "Value": {
-        "Ref": "TestHttp2"
-      }
-    },
     "BucketURL": {
       "Description": "Bucket URL",
       "Value": {

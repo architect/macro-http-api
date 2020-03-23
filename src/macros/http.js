@@ -12,7 +12,7 @@ module.exports = function http(arc, cfn, stage) {
     delete cfn.Outputs.restApiId
 
     // add the http api
-    /**/
+    /*
     cfn.Resources.HTTP  = {
       Type: 'AWS::Serverless::HttpApi',
       Properties: {
@@ -33,8 +33,8 @@ module.exports = function http(arc, cfn, stage) {
         let eventname = `${ resource }Event`
         cfn.Resources[resource].Properties.Events[eventname].Type = 'HttpApi'
         delete cfn.Resources[resource].Properties.Events[eventname].Properties.RestApiId
-        cfn.Resources[resource].Properties.Events[eventname].Properties.PayloadFormatVersion = '1.0'
-        cfn.Resources[resource].Properties.Events[eventname].Properties.ApiId = { Ref: 'HTTP' }
+        //cfn.Resources[resource].Properties.Events[eventname].Properties.PayloadFormatVersion = '1.0'
+        //cfn.Resources[resource].Properties.Events[eventname].Properties.ApiId = { Ref: 'HTTP' }
       }
     }
   }
