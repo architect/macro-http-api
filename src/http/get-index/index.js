@@ -1,3 +1,2 @@
-let proxy = require('@architect/shared/http/proxy/public')
-
-exports.handler = proxy({spa: true})
+let { handler } = require('@architect/http-proxy')
+exports.handler = handler

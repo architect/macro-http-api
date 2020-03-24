@@ -1,103 +1,8 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
   "Transform": "AWS::Serverless-2016-10-31",
-  "Description": "Exported by architect/package@1.2.10 on 2020-03-24T04:00:40.625Z",
+  "Description": "Exported by architect/package@1.2.10 on 2020-03-24T20:48:25.193Z",
   "Resources": {
-    "GetIndex": {
-      "Type": "AWS::Serverless::Function",
-      "Properties": {
-        "Handler": "index.handler",
-        "CodeUri": "./src/http/get-index",
-        "Runtime": "nodejs12.x",
-        "MemorySize": 1152,
-        "Timeout": 5,
-        "Environment": {
-          "Variables": {
-            "ARC_ROLE": {
-              "Ref": "Role"
-            },
-            "ARC_CLOUDFORMATION": {
-              "Ref": "AWS::StackName"
-            },
-            "ARC_APP_NAME": "test-http-3",
-            "ARC_HTTP": "aws_proxy",
-            "NODE_ENV": "staging",
-            "SESSION_TABLE_NAME": "jwe",
-            "ARC_STATIC_BUCKET": {
-              "Ref": "StaticBucket"
-            }
-          }
-        },
-        "Role": {
-          "Fn::Sub": [
-            "arn:aws:iam::${AWS::AccountId}:role/${roleName}",
-            {
-              "roleName": {
-                "Ref": "Role"
-              }
-            }
-          ]
-        },
-        "Events": {
-          "GetIndexEvent": {
-            "Type": "HttpApi",
-            "Properties": {
-              "Path": "/",
-              "Method": "GET"
-            }
-          },
-          "ImplicitApi": {
-            "Type": "HttpApi"
-          }
-        }
-      }
-    },
-    "GetStatic": {
-      "Type": "AWS::Serverless::Function",
-      "Properties": {
-        "Handler": "index.handler",
-        "CodeUri": "./src/http/get-_static",
-        "Runtime": "nodejs12.x",
-        "MemorySize": 1152,
-        "Timeout": 5,
-        "Environment": {
-          "Variables": {
-            "ARC_ROLE": {
-              "Ref": "Role"
-            },
-            "ARC_CLOUDFORMATION": {
-              "Ref": "AWS::StackName"
-            },
-            "ARC_APP_NAME": "test-http-3",
-            "ARC_HTTP": "aws_proxy",
-            "NODE_ENV": "staging",
-            "SESSION_TABLE_NAME": "jwe",
-            "ARC_STATIC_BUCKET": {
-              "Ref": "StaticBucket"
-            }
-          }
-        },
-        "Role": {
-          "Fn::Sub": [
-            "arn:aws:iam::${AWS::AccountId}:role/${roleName}",
-            {
-              "roleName": {
-                "Ref": "Role"
-              }
-            }
-          ]
-        },
-        "Events": {
-          "GetStaticEvent": {
-            "Type": "HttpApi",
-            "Properties": {
-              "Path": "/_static/{proxy+}",
-              "Method": "GET"
-            }
-          }
-        }
-      }
-    },
     "GetCats": {
       "Type": "AWS::Serverless::Function",
       "Properties": {
@@ -114,7 +19,7 @@
             "ARC_CLOUDFORMATION": {
               "Ref": "AWS::StackName"
             },
-            "ARC_APP_NAME": "test-http-3",
+            "ARC_APP_NAME": "test-http",
             "ARC_HTTP": "aws_proxy",
             "NODE_ENV": "staging",
             "SESSION_TABLE_NAME": "jwe",
@@ -160,7 +65,7 @@
             "ARC_CLOUDFORMATION": {
               "Ref": "AWS::StackName"
             },
-            "ARC_APP_NAME": "test-http-3",
+            "ARC_APP_NAME": "test-http",
             "ARC_HTTP": "aws_proxy",
             "NODE_ENV": "staging",
             "SESSION_TABLE_NAME": "jwe",
@@ -206,7 +111,7 @@
             "ARC_CLOUDFORMATION": {
               "Ref": "AWS::StackName"
             },
-            "ARC_APP_NAME": "test-http-3",
+            "ARC_APP_NAME": "test-http",
             "ARC_HTTP": "aws_proxy",
             "NODE_ENV": "staging",
             "SESSION_TABLE_NAME": "jwe",
@@ -252,7 +157,7 @@
             "ARC_CLOUDFORMATION": {
               "Ref": "AWS::StackName"
             },
-            "ARC_APP_NAME": "test-http-3",
+            "ARC_APP_NAME": "test-http",
             "ARC_HTTP": "aws_proxy",
             "NODE_ENV": "staging",
             "SESSION_TABLE_NAME": "jwe",
@@ -298,7 +203,7 @@
             "ARC_CLOUDFORMATION": {
               "Ref": "AWS::StackName"
             },
-            "ARC_APP_NAME": "test-http-3",
+            "ARC_APP_NAME": "test-http",
             "ARC_HTTP": "aws_proxy",
             "NODE_ENV": "staging",
             "SESSION_TABLE_NAME": "jwe",
@@ -324,6 +229,55 @@
               "Path": "/cats/{catID}",
               "Method": "DELETE"
             }
+          }
+        }
+      }
+    },
+    "GetIndex": {
+      "Type": "AWS::Serverless::Function",
+      "Properties": {
+        "Handler": "index.handler",
+        "CodeUri": "/Users/brianleroux/Repo/core-deploy/node_modules/@architect/http-proxy/dist",
+        "Runtime": "nodejs12.x",
+        "MemorySize": 1152,
+        "Timeout": 5,
+        "Environment": {
+          "Variables": {
+            "ARC_ROLE": {
+              "Ref": "Role"
+            },
+            "ARC_CLOUDFORMATION": {
+              "Ref": "AWS::StackName"
+            },
+            "ARC_APP_NAME": "test-http",
+            "ARC_HTTP": "aws_proxy",
+            "NODE_ENV": "staging",
+            "SESSION_TABLE_NAME": "jwe",
+            "ARC_STATIC_BUCKET": {
+              "Ref": "StaticBucket"
+            }
+          }
+        },
+        "Role": {
+          "Fn::Sub": [
+            "arn:aws:iam::${AWS::AccountId}:role/${roleName}",
+            {
+              "roleName": {
+                "Ref": "Role"
+              }
+            }
+          ]
+        },
+        "Events": {
+          "GetIndexEvent": {
+            "Type": "HttpApi",
+            "Properties": {
+              "Path": "/",
+              "Method": "GET"
+            }
+          },
+          "ImplicitApi": {
+            "Type": "HttpApi"
           }
         }
       }
@@ -468,6 +422,53 @@
             "Ref": "Role"
           }
         ]
+      }
+    },
+    "GetStatic": {
+      "Type": "AWS::Serverless::Function",
+      "Properties": {
+        "Handler": "index.handler",
+        "CodeUri": "/Users/brianleroux/Repo/arc-example-macro-http/node_modules/@architect/http-proxy/dist",
+        "Runtime": "nodejs12.x",
+        "MemorySize": 1152,
+        "Timeout": 5,
+        "Environment": {
+          "Variables": {
+            "ARC_ROLE": {
+              "Ref": "Role"
+            },
+            "ARC_CLOUDFORMATION": {
+              "Ref": "AWS::StackName"
+            },
+            "ARC_APP_NAME": "test-http",
+            "ARC_HTTP": "aws_proxy",
+            "NODE_ENV": "staging",
+            "SESSION_TABLE_NAME": "jwe",
+            "ARC_STATIC_BUCKET": {
+              "Ref": "StaticBucket"
+            },
+            "ARC_STATIC_SPA": "false"
+          }
+        },
+        "Role": {
+          "Fn::Sub": [
+            "arn:aws:iam::${AWS::AccountId}:role/${roleName}",
+            {
+              "roleName": {
+                "Ref": "Role"
+              }
+            }
+          ]
+        },
+        "Events": {
+          "GetStaticEvent": {
+            "Type": "HttpApi",
+            "Properties": {
+              "Path": "/_static/{proxy+}",
+              "Method": "GET"
+            }
+          }
+        }
       }
     }
   },

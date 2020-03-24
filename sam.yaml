@@ -1,76 +1,12 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: Exported by architect/package@1.2.10 on 2020-03-24T04:00:40.625Z
+Description: Exported by architect/package@1.2.10 on 2020-03-24T20:48:25.193Z
 Resources:
-  GetIndex:
-    Type: AWS::Serverless::Function
-    Properties:
-      Handler: index.handler
-      CodeUri: s3://test-http-3-cfn-deployments-7814d/b7d0a0fbc6cb2f3f71d1c59696478c64
-      Runtime: nodejs12.x
-      MemorySize: 1152
-      Timeout: 5
-      Environment:
-        Variables:
-          ARC_ROLE:
-            Ref: Role
-          ARC_CLOUDFORMATION:
-            Ref: AWS::StackName
-          ARC_APP_NAME: test-http-3
-          ARC_HTTP: aws_proxy
-          NODE_ENV: staging
-          SESSION_TABLE_NAME: jwe
-          ARC_STATIC_BUCKET:
-            Ref: StaticBucket
-      Role:
-        Fn::Sub:
-        - arn:aws:iam::${AWS::AccountId}:role/${roleName}
-        - roleName:
-            Ref: Role
-      Events:
-        GetIndexEvent:
-          Type: HttpApi
-          Properties:
-            Path: /
-            Method: GET
-        ImplicitApi:
-          Type: HttpApi
-  GetStatic:
-    Type: AWS::Serverless::Function
-    Properties:
-      Handler: index.handler
-      CodeUri: s3://test-http-3-cfn-deployments-7814d/b4912c1dc7554c412860c53ab2e42d39
-      Runtime: nodejs12.x
-      MemorySize: 1152
-      Timeout: 5
-      Environment:
-        Variables:
-          ARC_ROLE:
-            Ref: Role
-          ARC_CLOUDFORMATION:
-            Ref: AWS::StackName
-          ARC_APP_NAME: test-http-3
-          ARC_HTTP: aws_proxy
-          NODE_ENV: staging
-          SESSION_TABLE_NAME: jwe
-          ARC_STATIC_BUCKET:
-            Ref: StaticBucket
-      Role:
-        Fn::Sub:
-        - arn:aws:iam::${AWS::AccountId}:role/${roleName}
-        - roleName:
-            Ref: Role
-      Events:
-        GetStaticEvent:
-          Type: HttpApi
-          Properties:
-            Path: /_static/{proxy+}
-            Method: GET
   GetCats:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      CodeUri: s3://test-http-3-cfn-deployments-7814d/d2f661e6c8fea9691b77e7dcd80bfb0b
+      CodeUri: s3://test-http-cfn-deployments-b5a15/9ea2ab29779a4f21b6345f98ed6a6244
       Runtime: nodejs12.x
       MemorySize: 1152
       Timeout: 5
@@ -80,7 +16,7 @@ Resources:
             Ref: Role
           ARC_CLOUDFORMATION:
             Ref: AWS::StackName
-          ARC_APP_NAME: test-http-3
+          ARC_APP_NAME: test-http
           ARC_HTTP: aws_proxy
           NODE_ENV: staging
           SESSION_TABLE_NAME: jwe
@@ -101,7 +37,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      CodeUri: s3://test-http-3-cfn-deployments-7814d/6afa592e61189344ffdb2207d4152bf6
+      CodeUri: s3://test-http-cfn-deployments-b5a15/fd0bdc0bcb9b76995224e565af2c6442
       Runtime: nodejs12.x
       MemorySize: 1152
       Timeout: 5
@@ -111,7 +47,7 @@ Resources:
             Ref: Role
           ARC_CLOUDFORMATION:
             Ref: AWS::StackName
-          ARC_APP_NAME: test-http-3
+          ARC_APP_NAME: test-http
           ARC_HTTP: aws_proxy
           NODE_ENV: staging
           SESSION_TABLE_NAME: jwe
@@ -132,7 +68,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      CodeUri: s3://test-http-3-cfn-deployments-7814d/180baa3a3352c855f6359a9000f9b6c1
+      CodeUri: s3://test-http-cfn-deployments-b5a15/5152ed16254bc0f73458cad922dcc881
       Runtime: nodejs12.x
       MemorySize: 1152
       Timeout: 5
@@ -142,7 +78,7 @@ Resources:
             Ref: Role
           ARC_CLOUDFORMATION:
             Ref: AWS::StackName
-          ARC_APP_NAME: test-http-3
+          ARC_APP_NAME: test-http
           ARC_HTTP: aws_proxy
           NODE_ENV: staging
           SESSION_TABLE_NAME: jwe
@@ -163,7 +99,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      CodeUri: s3://test-http-3-cfn-deployments-7814d/7870eb0afa80b0ff1f3434c5f1fddcfe
+      CodeUri: s3://test-http-cfn-deployments-b5a15/9342f6ccf49f5f5d84147c1548e1b31f
       Runtime: nodejs12.x
       MemorySize: 1152
       Timeout: 5
@@ -173,7 +109,7 @@ Resources:
             Ref: Role
           ARC_CLOUDFORMATION:
             Ref: AWS::StackName
-          ARC_APP_NAME: test-http-3
+          ARC_APP_NAME: test-http
           ARC_HTTP: aws_proxy
           NODE_ENV: staging
           SESSION_TABLE_NAME: jwe
@@ -194,7 +130,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      CodeUri: s3://test-http-3-cfn-deployments-7814d/33cb044e4cadc1f00a3ffea02b011758
+      CodeUri: s3://test-http-cfn-deployments-b5a15/daa4ad3de9007c476b863612acba0e55
       Runtime: nodejs12.x
       MemorySize: 1152
       Timeout: 5
@@ -204,7 +140,7 @@ Resources:
             Ref: Role
           ARC_CLOUDFORMATION:
             Ref: AWS::StackName
-          ARC_APP_NAME: test-http-3
+          ARC_APP_NAME: test-http
           ARC_HTTP: aws_proxy
           NODE_ENV: staging
           SESSION_TABLE_NAME: jwe
@@ -221,6 +157,39 @@ Resources:
           Properties:
             Path: /cats/{catID}
             Method: DELETE
+  GetIndex:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.handler
+      CodeUri: s3://test-http-cfn-deployments-b5a15/b8860f083d3babe7264bd6535d6e0307
+      Runtime: nodejs12.x
+      MemorySize: 1152
+      Timeout: 5
+      Environment:
+        Variables:
+          ARC_ROLE:
+            Ref: Role
+          ARC_CLOUDFORMATION:
+            Ref: AWS::StackName
+          ARC_APP_NAME: test-http
+          ARC_HTTP: aws_proxy
+          NODE_ENV: staging
+          SESSION_TABLE_NAME: jwe
+          ARC_STATIC_BUCKET:
+            Ref: StaticBucket
+      Role:
+        Fn::Sub:
+        - arn:aws:iam::${AWS::AccountId}:role/${roleName}
+        - roleName:
+            Ref: Role
+      Events:
+        GetIndexEvent:
+          Type: HttpApi
+          Properties:
+            Path: /
+            Method: GET
+        ImplicitApi:
+          Type: HttpApi
   StaticBucket:
     Type: AWS::S3::Bucket
     Properties:
@@ -301,6 +270,38 @@ Resources:
             - {}
       Roles:
       - Ref: Role
+  GetStatic:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.handler
+      CodeUri: s3://test-http-cfn-deployments-b5a15/143c67622a8f8b6ce7b09da0bde590a4
+      Runtime: nodejs12.x
+      MemorySize: 1152
+      Timeout: 5
+      Environment:
+        Variables:
+          ARC_ROLE:
+            Ref: Role
+          ARC_CLOUDFORMATION:
+            Ref: AWS::StackName
+          ARC_APP_NAME: test-http
+          ARC_HTTP: aws_proxy
+          NODE_ENV: staging
+          SESSION_TABLE_NAME: jwe
+          ARC_STATIC_BUCKET:
+            Ref: StaticBucket
+          ARC_STATIC_SPA: 'false'
+      Role:
+        Fn::Sub:
+        - arn:aws:iam::${AWS::AccountId}:role/${roleName}
+        - roleName:
+            Ref: Role
+      Events:
+        GetStaticEvent:
+          Type: HttpApi
+          Properties:
+            Path: /_static/{proxy+}
+            Method: GET
 Outputs:
   BucketURL:
     Description: Bucket URL
