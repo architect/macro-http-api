@@ -1,0 +1,502 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Transform": "AWS::Serverless-2016-10-31",
+  "Description": "Exported by architect/package@1.2.10 on 2020-03-24T04:00:40.625Z",
+  "Resources": {
+    "GetIndex": {
+      "Type": "AWS::Serverless::Function",
+      "Properties": {
+        "Handler": "index.handler",
+        "CodeUri": "./src/http/get-index",
+        "Runtime": "nodejs12.x",
+        "MemorySize": 1152,
+        "Timeout": 5,
+        "Environment": {
+          "Variables": {
+            "ARC_ROLE": {
+              "Ref": "Role"
+            },
+            "ARC_CLOUDFORMATION": {
+              "Ref": "AWS::StackName"
+            },
+            "ARC_APP_NAME": "test-http-3",
+            "ARC_HTTP": "aws_proxy",
+            "NODE_ENV": "staging",
+            "SESSION_TABLE_NAME": "jwe",
+            "ARC_STATIC_BUCKET": {
+              "Ref": "StaticBucket"
+            }
+          }
+        },
+        "Role": {
+          "Fn::Sub": [
+            "arn:aws:iam::${AWS::AccountId}:role/${roleName}",
+            {
+              "roleName": {
+                "Ref": "Role"
+              }
+            }
+          ]
+        },
+        "Events": {
+          "GetIndexEvent": {
+            "Type": "HttpApi",
+            "Properties": {
+              "Path": "/",
+              "Method": "GET"
+            }
+          },
+          "ImplicitApi": {
+            "Type": "HttpApi"
+          }
+        }
+      }
+    },
+    "GetStatic": {
+      "Type": "AWS::Serverless::Function",
+      "Properties": {
+        "Handler": "index.handler",
+        "CodeUri": "./src/http/get-_static",
+        "Runtime": "nodejs12.x",
+        "MemorySize": 1152,
+        "Timeout": 5,
+        "Environment": {
+          "Variables": {
+            "ARC_ROLE": {
+              "Ref": "Role"
+            },
+            "ARC_CLOUDFORMATION": {
+              "Ref": "AWS::StackName"
+            },
+            "ARC_APP_NAME": "test-http-3",
+            "ARC_HTTP": "aws_proxy",
+            "NODE_ENV": "staging",
+            "SESSION_TABLE_NAME": "jwe",
+            "ARC_STATIC_BUCKET": {
+              "Ref": "StaticBucket"
+            }
+          }
+        },
+        "Role": {
+          "Fn::Sub": [
+            "arn:aws:iam::${AWS::AccountId}:role/${roleName}",
+            {
+              "roleName": {
+                "Ref": "Role"
+              }
+            }
+          ]
+        },
+        "Events": {
+          "GetStaticEvent": {
+            "Type": "HttpApi",
+            "Properties": {
+              "Path": "/_static/{proxy+}",
+              "Method": "GET"
+            }
+          }
+        }
+      }
+    },
+    "GetCats": {
+      "Type": "AWS::Serverless::Function",
+      "Properties": {
+        "Handler": "index.handler",
+        "CodeUri": "./src/http/get-cats",
+        "Runtime": "nodejs12.x",
+        "MemorySize": 1152,
+        "Timeout": 5,
+        "Environment": {
+          "Variables": {
+            "ARC_ROLE": {
+              "Ref": "Role"
+            },
+            "ARC_CLOUDFORMATION": {
+              "Ref": "AWS::StackName"
+            },
+            "ARC_APP_NAME": "test-http-3",
+            "ARC_HTTP": "aws_proxy",
+            "NODE_ENV": "staging",
+            "SESSION_TABLE_NAME": "jwe",
+            "ARC_STATIC_BUCKET": {
+              "Ref": "StaticBucket"
+            }
+          }
+        },
+        "Role": {
+          "Fn::Sub": [
+            "arn:aws:iam::${AWS::AccountId}:role/${roleName}",
+            {
+              "roleName": {
+                "Ref": "Role"
+              }
+            }
+          ]
+        },
+        "Events": {
+          "GetCatsEvent": {
+            "Type": "HttpApi",
+            "Properties": {
+              "Path": "/cats",
+              "Method": "GET"
+            }
+          }
+        }
+      }
+    },
+    "PostCats": {
+      "Type": "AWS::Serverless::Function",
+      "Properties": {
+        "Handler": "index.handler",
+        "CodeUri": "./src/http/post-cats",
+        "Runtime": "nodejs12.x",
+        "MemorySize": 1152,
+        "Timeout": 5,
+        "Environment": {
+          "Variables": {
+            "ARC_ROLE": {
+              "Ref": "Role"
+            },
+            "ARC_CLOUDFORMATION": {
+              "Ref": "AWS::StackName"
+            },
+            "ARC_APP_NAME": "test-http-3",
+            "ARC_HTTP": "aws_proxy",
+            "NODE_ENV": "staging",
+            "SESSION_TABLE_NAME": "jwe",
+            "ARC_STATIC_BUCKET": {
+              "Ref": "StaticBucket"
+            }
+          }
+        },
+        "Role": {
+          "Fn::Sub": [
+            "arn:aws:iam::${AWS::AccountId}:role/${roleName}",
+            {
+              "roleName": {
+                "Ref": "Role"
+              }
+            }
+          ]
+        },
+        "Events": {
+          "PostCatsEvent": {
+            "Type": "HttpApi",
+            "Properties": {
+              "Path": "/cats",
+              "Method": "POST"
+            }
+          }
+        }
+      }
+    },
+    "PatchCatsCatID": {
+      "Type": "AWS::Serverless::Function",
+      "Properties": {
+        "Handler": "index.handler",
+        "CodeUri": "./src/http/patch-cats-000catID",
+        "Runtime": "nodejs12.x",
+        "MemorySize": 1152,
+        "Timeout": 5,
+        "Environment": {
+          "Variables": {
+            "ARC_ROLE": {
+              "Ref": "Role"
+            },
+            "ARC_CLOUDFORMATION": {
+              "Ref": "AWS::StackName"
+            },
+            "ARC_APP_NAME": "test-http-3",
+            "ARC_HTTP": "aws_proxy",
+            "NODE_ENV": "staging",
+            "SESSION_TABLE_NAME": "jwe",
+            "ARC_STATIC_BUCKET": {
+              "Ref": "StaticBucket"
+            }
+          }
+        },
+        "Role": {
+          "Fn::Sub": [
+            "arn:aws:iam::${AWS::AccountId}:role/${roleName}",
+            {
+              "roleName": {
+                "Ref": "Role"
+              }
+            }
+          ]
+        },
+        "Events": {
+          "PatchCatsCatIDEvent": {
+            "Type": "HttpApi",
+            "Properties": {
+              "Path": "/cats/{catID}",
+              "Method": "PATCH"
+            }
+          }
+        }
+      }
+    },
+    "PutCatsCatID": {
+      "Type": "AWS::Serverless::Function",
+      "Properties": {
+        "Handler": "index.handler",
+        "CodeUri": "./src/http/put-cats-000catID",
+        "Runtime": "nodejs12.x",
+        "MemorySize": 1152,
+        "Timeout": 5,
+        "Environment": {
+          "Variables": {
+            "ARC_ROLE": {
+              "Ref": "Role"
+            },
+            "ARC_CLOUDFORMATION": {
+              "Ref": "AWS::StackName"
+            },
+            "ARC_APP_NAME": "test-http-3",
+            "ARC_HTTP": "aws_proxy",
+            "NODE_ENV": "staging",
+            "SESSION_TABLE_NAME": "jwe",
+            "ARC_STATIC_BUCKET": {
+              "Ref": "StaticBucket"
+            }
+          }
+        },
+        "Role": {
+          "Fn::Sub": [
+            "arn:aws:iam::${AWS::AccountId}:role/${roleName}",
+            {
+              "roleName": {
+                "Ref": "Role"
+              }
+            }
+          ]
+        },
+        "Events": {
+          "PutCatsCatIDEvent": {
+            "Type": "HttpApi",
+            "Properties": {
+              "Path": "/cats/{catID}",
+              "Method": "PUT"
+            }
+          }
+        }
+      }
+    },
+    "DeleteCatsCatID": {
+      "Type": "AWS::Serverless::Function",
+      "Properties": {
+        "Handler": "index.handler",
+        "CodeUri": "./src/http/delete-cats-000catID",
+        "Runtime": "nodejs12.x",
+        "MemorySize": 1152,
+        "Timeout": 5,
+        "Environment": {
+          "Variables": {
+            "ARC_ROLE": {
+              "Ref": "Role"
+            },
+            "ARC_CLOUDFORMATION": {
+              "Ref": "AWS::StackName"
+            },
+            "ARC_APP_NAME": "test-http-3",
+            "ARC_HTTP": "aws_proxy",
+            "NODE_ENV": "staging",
+            "SESSION_TABLE_NAME": "jwe",
+            "ARC_STATIC_BUCKET": {
+              "Ref": "StaticBucket"
+            }
+          }
+        },
+        "Role": {
+          "Fn::Sub": [
+            "arn:aws:iam::${AWS::AccountId}:role/${roleName}",
+            {
+              "roleName": {
+                "Ref": "Role"
+              }
+            }
+          ]
+        },
+        "Events": {
+          "DeleteCatsCatIDEvent": {
+            "Type": "HttpApi",
+            "Properties": {
+              "Path": "/cats/{catID}",
+              "Method": "DELETE"
+            }
+          }
+        }
+      }
+    },
+    "StaticBucket": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "AccessControl": "PublicRead",
+        "WebsiteConfiguration": {
+          "IndexDocument": "index.html",
+          "ErrorDocument": "404.html"
+        }
+      }
+    },
+    "Role": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "Policies": [
+          {
+            "PolicyName": "ArcGlobalPolicy",
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "logs:CreateLogGroup",
+                    "logs:CreateLogStream",
+                    "logs:PutLogEvents",
+                    "logs:DescribeLogStreams"
+                  ],
+                  "Resource": "arn:aws:logs:*:*:*"
+                }
+              ]
+            }
+          },
+          {
+            "PolicyName": "ArcStaticBucketPolicy",
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:PutObject",
+                    "s3:PutObjectAcl",
+                    "s3:DeleteObject"
+                  ],
+                  "Resource": [
+                    {
+                      "Fn::Sub": [
+                        "arn:aws:s3:::${bukkit}",
+                        {
+                          "bukkit": {
+                            "Ref": "StaticBucket"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "Fn::Sub": [
+                        "arn:aws:s3:::${bukkit}/*",
+                        {
+                          "bukkit": {
+                            "Ref": "StaticBucket"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "StaticBucketParam": {
+      "Type": "AWS::SSM::Parameter",
+      "Properties": {
+        "Type": "String",
+        "Name": {
+          "Fn::Sub": [
+            "/${AWS::StackName}/static/${key}",
+            {
+              "key": "bucket"
+            }
+          ]
+        },
+        "Value": {
+          "Ref": "StaticBucket"
+        }
+      }
+    },
+    "StaticFingerprintParam": {
+      "Type": "AWS::SSM::Parameter",
+      "Properties": {
+        "Type": "String",
+        "Name": {
+          "Fn::Sub": [
+            "/${AWS::StackName}/static/${key}",
+            {
+              "key": "fingerprint"
+            }
+          ]
+        },
+        "Value": "false"
+      }
+    },
+    "ParameterStorePolicy": {
+      "Type": "AWS::IAM::Policy",
+      "DependsOn": "Role",
+      "Properties": {
+        "PolicyName": "ArcParameterStorePolicy",
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "ssm:GetParametersByPath",
+              "Resource": {
+                "Fn::Sub": [
+                  "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${AWS::StackName}",
+                  {}
+                ]
+              }
+            }
+          ]
+        },
+        "Roles": [
+          {
+            "Ref": "Role"
+          }
+        ]
+      }
+    }
+  },
+  "Outputs": {
+    "BucketURL": {
+      "Description": "Bucket URL",
+      "Value": {
+        "Fn::Sub": [
+          "http://${bukkit}.s3-website-${AWS::Region}.amazonaws.com",
+          {
+            "bukkit": {
+              "Ref": "StaticBucket"
+            }
+          }
+        ]
+      }
+    },
+    "HTTP": {
+      "Description": "API Gateway",
+      "Value": {
+        "Fn::Sub": [
+          "https://${idx}.execute-api.${AWS::Region}.amazonaws.com",
+          {
+            "idx": {
+              "Ref": "ServerlessHttpApi"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

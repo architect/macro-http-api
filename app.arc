@@ -6,6 +6,7 @@ folder public
 
 @http
 get /
+get /_static
 get /cats
 post /cats
 patch /cats/:catID

@@ -1,3 +1,3 @@
 exports.handler = async function http (req) {
-  return { getscats: true }
+  return { getscats: true, req   }
 }

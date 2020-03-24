@@ -27,27 +27,37 @@ module.exports = function http(arc, cfn, stage) {
     }
   }
 
-  // add the _static lambda
-  let copy = JSON.stringify(cfn.Resources.GetIndex) // yes this is neccessary: welcome to javascript
-  cfn.Resources.GetStaticProxy = JSON.parse(copy)
-  // point to dist
-  cfn.Resources.GetStaticProxy.Properties.CodeUri = join(process.cwd(), 'node_modules', '@architect', 'http-proxy', 'dist')
-  // ensure normal proxy behavior
-  cfn.Resources.GetStaticProxy.Properties.Environment.Variables.ARC_STATIC_SPA = 'false'
-  // remove copied event 
-  delete cfn.Resources.GetStaticProxy.Properties.Events
-  // add approp proxy event
-  cfn.Resources.GetStaticProxy.Properties.Events = {
-    GetStaticProxyEvent: {
-      Type: 'HttpApi',
-      Properties: {
-        Path: '/_static/{proxy+}',
-        Method: 'GET'
+  // create _static route if it does not exist
+  if (!cfn.Resources.GetStatic) {
+    // add the _static lambda
+    let copy = JSON.stringify(cfn.Resources.GetIndex) // yes this is neccessary: welcome to javascript
+    cfn.Resources.GetStatic = JSON.parse(copy)
+    // point to dist
+    cfn.Resources.GetStatic.Properties.CodeUri = join(process.cwd(), 'node_modules', '@architect', 'http-proxy', 'dist')
+    // ensure normal proxy behavior
+    cfn.Resources.GetStatic.Properties.Environment.Variables.ARC_STATIC_SPA = 'false'
+    // remove copied event 
+    delete cfn.Resources.GetStatic.Properties.Events
+    // add approp proxy event
+    cfn.Resources.GetStatic.Properties.Events = {
+      GetStaticEvent: {
+        Type: 'HttpApi',
+        Properties: {
+          Path: '/_static/{proxy+}',
+          Method: 'GET'
+        }
       }
     }
   }
+  else {
+    // allow the _static greedy proxy to be overridden (and make it greedy if it is)
+    let proxy = cfn.Resources.GetStatic && cfn.Resources.GetStatic.Properties.Events.GetStaticEvent.Properties.Path === '/_static'
+    if (proxy) {
+      cfn.Resources.GetStatic.Properties.Events.GetStaticEvent.Properties.Path = '/_static/{proxy+}'
+    }
+  }
 
-  // add output var
+  // add output var for printing to the console
   cfn.Outputs.HTTP = {
     Description: 'API Gateway',
     Value: {
