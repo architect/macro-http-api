@@ -4,18 +4,50 @@ Forward compat path to migrate Architect to API Gateway to HTTP APIs from REST A
 
 ## Omg Why?!
 
-Faster
-Cheaper
-New request payload
-New response schema
+- HTTP APIs are faster
+- HTTP APIs are cheaper
+- New request payload is better for parsing multivalue headers and cookies
+- New response schema cleans up barfy boilerplate
 
-Mostly I just want to rip the bandaide off as soon as possible. AWS is moving in this direction so the community should too. This should make it mostly trivial.
+Before:
+
+```javascript
+exports.handler = async function http(req) {
+  // req.headers.cookie (big string u need to parse)
+  // req.multiValueHeaders.cookie (array of strings)
+  return {
+	  isBase64Encoded: false,
+	  statusCode: 200,
+	  headers: { 
+      'Content-Type': 'application/json' 
+    },
+	  body: JSON.stringify({
+  		name: 'John Doe',
+	  	message: 'hello',
+	  })
+  }
+}
+```
+
+After:
+
+```javascript
+exports.handler = async function http(req) {
+  // req.cookies 👍🏽
+  return {
+	  name: "John Doe",
+  	message: "hello"
+  }
+}
+```
+
+> Way more chill 🧊
 
 ## Ok..How?!
 
-This repo is both the macro code and an example of using it.
+Install:
 
-`npm i arc-macro-http`
+`npm i @architect/macro-http-api`
 
 And add to your arcfile:
 
@@ -24,7 +56,7 @@ And add to your arcfile:
 myapp
 
 @macros
-arc-macro-http
+architect/macro-http-api
 
 @http
 get /

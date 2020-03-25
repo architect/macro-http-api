@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: Exported by architect/package@1.2.10 on 2020-03-24T20:48:25.193Z
+Description: Exported by architect/package@1.3.1 on 2020-03-25T00:44:02.431Z
 Resources:
   GetCats:
     Type: AWS::Serverless::Function
@@ -37,7 +37,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      CodeUri: s3://test-http-cfn-deployments-b5a15/fd0bdc0bcb9b76995224e565af2c6442
+      CodeUri: s3://test-http-cfn-deployments-b5a15/5b1a2130519c1bffdf2d45758ccfeecf
       Runtime: nodejs12.x
       MemorySize: 1152
       Timeout: 5
@@ -68,7 +68,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      CodeUri: s3://test-http-cfn-deployments-b5a15/5152ed16254bc0f73458cad922dcc881
+      CodeUri: s3://test-http-cfn-deployments-b5a15/023647dc00c3119bc3c47db3c5ec7d4a
       Runtime: nodejs12.x
       MemorySize: 1152
       Timeout: 5
@@ -99,7 +99,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      CodeUri: s3://test-http-cfn-deployments-b5a15/9342f6ccf49f5f5d84147c1548e1b31f
+      CodeUri: s3://test-http-cfn-deployments-b5a15/f731fd83dd5693386c8f3ca145810a87
       Runtime: nodejs12.x
       MemorySize: 1152
       Timeout: 5
@@ -130,7 +130,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      CodeUri: s3://test-http-cfn-deployments-b5a15/daa4ad3de9007c476b863612acba0e55
+      CodeUri: s3://test-http-cfn-deployments-b5a15/dc6c3449d79e626f14de2ddc25ebe36a
       Runtime: nodejs12.x
       MemorySize: 1152
       Timeout: 5
@@ -161,7 +161,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      CodeUri: s3://test-http-cfn-deployments-b5a15/b8860f083d3babe7264bd6535d6e0307
+      CodeUri: s3://test-http-cfn-deployments-b5a15/143c67622a8f8b6ce7b09da0bde590a4
       Runtime: nodejs12.x
       MemorySize: 1152
       Timeout: 5

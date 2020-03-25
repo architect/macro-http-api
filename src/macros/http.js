@@ -32,7 +32,7 @@ module.exports = function http(arc, cfn, stage) {
   }
 
   // create _static route if it does not exist
-  if (arc.static && !cfn.Resources.GetStatic) {
+  if (!cfn.Resources.GetStatic) {
 
     // add the _static lambda
     let copy = JSON.stringify(cfn.Resources.GetIndex) // yes this is neccessary: welcome to javascript

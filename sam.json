@@ -1,7 +1,7 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
   "Transform": "AWS::Serverless-2016-10-31",
-  "Description": "Exported by architect/package@1.2.10 on 2020-03-24T20:48:25.193Z",
+  "Description": "Exported by architect/package@1.3.1 on 2020-03-25T00:44:02.431Z",
   "Resources": {
     "GetCats": {
       "Type": "AWS::Serverless::Function",
@@ -237,7 +237,7 @@
       "Type": "AWS::Serverless::Function",
       "Properties": {
         "Handler": "index.handler",
-        "CodeUri": "/Users/brianleroux/Repo/core-deploy/node_modules/@architect/http-proxy/dist",
+        "CodeUri": "/Users/brianleroux/Repo/arc-example-macro-http/node_modules/@architect/http-proxy/dist",
         "Runtime": "nodejs12.x",
         "MemorySize": 1152,
         "Timeout": 5,

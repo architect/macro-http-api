@@ -1,5 +1,5 @@
 {
-  "name": "arc-macro-http-api",
+  "name": "@architect/macro-http-api",
   "version": "1.0.0",
   "description": "use http apis instead of rest apis with api gateway",
   "main": "src/macros/http.js",
@@ -8,20 +8,12 @@
     "@architect/utils": "^1.5.2"
   },
   "scripts": {
-    "deploy": "arc-deploy"
+    "deploy": "npx arc deploy"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/architect/arc-macro-http-api.git"
   },
-  "keywords": [],
   "author": "Brian LeRoux <b@brian.io>",
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/brianleroux/arc-macro-http-api/issues"
-  },
-  "homepage": "https://github.com/brianleroux/arc-macro-http-api#readme",
-  "devDependencies": {
-    "@architect/deploy": "^1.6.0"
-  }
+  "license": "Apache-2.0"
 }

@@ -12,4 +12,4 @@ put /cats/:catID
 delete /cats/:catID
 
 @macros
-http
+http # this is local ref, use architect/macro-http-api if you consume this macro as a module
