@@ -62,4 +62,6 @@ architect/macro-http-api
 get /
 ```
 
+> ⚠️ Warning! you must return `{statusCode, body, headers}` if the payload is NOT `application/json`
+
 That's it!
