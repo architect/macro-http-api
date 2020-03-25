@@ -16,15 +16,15 @@ exports.handler = async function http(req) {
   // req.headers.cookie (big string u need to parse)
   // req.multiValueHeaders.cookie (array of strings)
   return {
-	  isBase64Encoded: false,
-	  statusCode: 200,
-	  headers: { 
+    isBase64Encoded: false,
+    statusCode: 200,
+    headers: { 
       'Content-Type': 'application/json' 
     },
-	  body: JSON.stringify({
-  		name: 'John Doe',
-	  	message: 'hello',
-	  })
+    body: JSON.stringify({
+      name: 'John Doe',
+      message: 'hello',
+    })
   }
 }
 ```
@@ -35,8 +35,8 @@ After:
 exports.handler = async function http(req) {
   // req.cookies 👍🏽
   return {
-	  name: "John Doe",
-  	message: "hello"
+    name: "John Doe",
+    message: "hello"
   }
 }
 ```
