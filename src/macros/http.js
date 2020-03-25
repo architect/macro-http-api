@@ -2,16 +2,16 @@ let { join } = require('path')
 let { existsSync } = require('fs')
 let toLogicalID = require('@architect/utils/to-logical-id')
 
-module.exports = function http(arc, cfn, stage) {
+module.exports = function http(arc, cfn) {
 
   // delete all traces of the rest api
-  let appname = toLogicalID(arc.app[0]) 
-  delete cfn.Resources[appname] 
+  let appname = toLogicalID(arc.app[0])
+  delete cfn.Resources[appname]
   delete cfn.Resources.InvokeProxyPermission
-  delete cfn.Outputs.API 
+  delete cfn.Outputs.API
   delete cfn.Outputs.restApiId
 
-  // fix lambda event bindings 
+  // fix lambda event bindings
   for (let resource of Object.keys(cfn.Resources)) {
     if (cfn.Resources[resource].Type === 'AWS::Serverless::Function') {
 
@@ -22,7 +22,7 @@ module.exports = function http(arc, cfn, stage) {
       // generate routes implicitly
       delete cfn.Resources[resource].Properties.Events[eventname].Properties.RestApiId
 
-      // uncomment if you want the orig payload behavior: 
+      // uncomment if you want the orig payload behavior:
       // cfn.Resources[resource].Properties.Events[eventname].Properties.PayloadFormatVersion = '1.0'
       if (resource.toLowerCase() === 'getindex') {
         // enable 'default route'
@@ -48,7 +48,7 @@ module.exports = function http(arc, cfn, stage) {
     // ensure normal proxy behavior (do not force index.html for spa behavior)
     cfn.Resources.GetStatic.Properties.Environment.Variables.ARC_STATIC_SPA = 'false'
 
-    // remove copied event 
+    // remove copied event
     delete cfn.Resources.GetStatic.Properties.Events
 
     // add approp proxy event
@@ -82,7 +82,7 @@ module.exports = function http(arc, cfn, stage) {
           }
         }
       ]
-    } 
+    }
   }
 
   return cfn
